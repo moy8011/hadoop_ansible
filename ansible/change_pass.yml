@@ -1,0 +1,6 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: change password to user
+    script: ../scripts/change_pass.sh {{username}} {{password}}  

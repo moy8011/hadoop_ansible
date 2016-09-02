@@ -1,0 +1,6 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: copy hosts file
+    copy: src=../scripts/{{hostfile}} dest=/etc/hosts owner=root group=root mode=0644

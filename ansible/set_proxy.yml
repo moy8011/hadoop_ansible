@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: copy proxy
+    copy: src=../scripts/proxy.sh dest=/etc/profile.d/proxy.sh owner=root group=root mode=0755
+  
+  - name: source profile
+    shell: "source /etc/profile"
+    
+#  - name: add proxy to yum conf
+#    lineinfile: dest=/etc/yum.conf regexp=^proxy= line=proxy=http://

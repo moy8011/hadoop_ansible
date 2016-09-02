@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+  - name: test 1
+    debug: var=hostvars[inventory_hostname] verbosity=4
+
+  - name: test 2
+    debug: var=ansible_eth0.ipv4.address
+
+  - name: test 3
+    debug: var=ansible_distribution

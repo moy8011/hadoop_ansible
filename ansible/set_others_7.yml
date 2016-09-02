@@ -1,0 +1,7 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: set other configurations
+    script: ../scripts/set_others_7.sh 
+    

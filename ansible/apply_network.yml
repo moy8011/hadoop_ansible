@@ -1,0 +1,6 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: apply network
+    script: ../scripts/apply_network.sh {{nic}} {{gateway}} {{mask}} {{dns}} {{ var=ansible_eth0.ipv4.address }}  
