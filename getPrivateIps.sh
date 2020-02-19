@@ -1,0 +1,1 @@
+aws ec2 describe-instances --profile iteso --region=us-west-2 --query 'Reservations[*].Instances[*].[InstanceId,Tags[?Key==`Name`].Value|[0],State.Name,PublicDnsName,PublicIpAddress,PrivateIpAddress]' --filters Name=instance-state-name,Values=running --output table | grep ec2 | awk '{print $11 "  " $3 }'

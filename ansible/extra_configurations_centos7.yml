@@ -1,0 +1,42 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Check current SELINUX setting
+    command: getenforce
+    
+  - name: Disable SELINUX
+    lineinfile:
+      backup: yes
+      path: /etc/selinux/config
+      regexp: '^SELINUX'
+      line: 'SELINUX=disabled'
+
+  - name: Disable SELINUX immediately
+    command: setenforce 0
+
+  - name: Install NTP
+    yum:
+      name: ntp
+      state: latest
+
+  - name: Start and enable NTP, if not started
+    service:
+      name: ntpd
+      state: started
+      enabled: yes
+
+  - name: Change UMASK default permissions in all nodes for your current login session
+    command: umask 0022
+
+  - name: Checking your current umask
+    command: umask
+
+  - name: Permanently changing the umask for all interactive users
+    lineinfile:
+      backup: yes
+      path: /etc/profile
+      regexp: '^umask 0022'
+      line: 'umask 0022'
+      
